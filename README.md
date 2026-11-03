@@ -11,10 +11,20 @@
 
 ## 安装
 
-1. 打开 `chrome://extensions`
-2. 右上角打开「开发者模式」
-3. 「加载已解压的扩展程序」→ 选本目录
+**方式一：Chrome 应用商店（推荐）**
+
+在 Chrome 应用商店搜索「**封面避雷针**」（英文名 Clickbait Cop）。商店审核通过后即可搜到，一键安装，无需开发者模式。
+
+**方式二：手动安装（商店版审核期间可用）**
+
+1. 下载 [cover-lightning-rod-1.3.2.zip](https://github.com/hiyanyang/clickbait-cop/releases/latest/download/cover-lightning-rod-1.3.2.zip) 并解压
+2. 打开 `chrome://extensions`，右上角打开「开发者模式」
+3. 「加载已解压的扩展程序」→ 选解压出来的文件夹
 4. 打开 youtube.com / bilibili.com / douyin.com，刷新一次
+
+也可以直接 `git clone` 本仓库，或点页面绿色 `Code` → `Download ZIP`，然后加载本目录。
+
+手动装的是开发者模式扩展，Chrome 每次启动会提示「请停用开发者模式扩展程序」，关掉即可；商店版没有这个提示。
 
 Edge 用 `edge://extensions`，步骤相同。
 
@@ -172,7 +182,9 @@ scripts/package.sh   打 zip
 
 ## 上架
 
-完整步骤见 [docs/PUBLISH.md](docs/PUBLISH.md)。一句话版：付 5 美元 → 实名验证 → 上传 `dist/*.zip` → 填商品详情与隐私表单 → 提交审核。
+状态：**已提交 Chrome 应用商店，审核中**（2026-11-03）。审核通过后商店搜索「封面避雷针」即可安装。
+
+完整步骤见 [docs/PUBLISH.md](docs/PUBLISH.md)，当前版本的发布说明见 [releases](https://github.com/hiyanyang/clickbait-cop/releases)。
 
 ## 来源与致谢
 
