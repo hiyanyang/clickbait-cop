@@ -52,7 +52,7 @@
 bash scripts/package.sh
 ```
 
-生成 `dist/cover-lightning-rod-1.3.1.zip`。三条硬规则：
+生成 `dist/cover-lightning-rod-1.3.2.zip`。三条硬规则：
 
 - `manifest.json` 必须在 zip **根目录**，不能套一层文件夹（本脚本已处理）。
 - 版本号只能往上加，**永久不能回退或复用**。改完代码记得改 `manifest.json` 的 `version`。
