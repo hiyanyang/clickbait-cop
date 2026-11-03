@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>封面避雷针 · 隐私政策</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        margin: 0 auto;
+        padding: 48px 24px 80px;
+        max-width: 760px;
+        font: 16px/1.85 -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: #1f2328;
+        background: #fff;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          color: #e6edf3;
+          background: #0d1117;
+        }
+        code {
+          background: #161b22;
+        }
+        th {
+          background: #161b22;
+        }
+        td,
+        th {
+          border-color: #30363d;
+        }
+      }
+      h1 {
+        font-size: 28px;
+        margin: 0 0 4px;
+      }
+      h2 {
+        font-size: 19px;
+        margin: 36px 0 10px;
+      }
+      .meta {
+        color: #6e7781;
+        font-size: 14px;
+        margin-bottom: 28px;
+      }
+      .lead {
+        padding: 16px 18px;
+        border-left: 3px solid #2563eb;
+        background: rgba(37, 99, 235, 0.06);
+        border-radius: 4px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 15px;
+        margin: 12px 0;
+      }
+      td,
+      th {
+        border: 1px solid #d0d7de;
+        padding: 8px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        background: #f6f8fa;
+        font-weight: 600;
+      }
+      code {
+        font-family: ui-monospace, Consolas, monospace;
+        font-size: 13px;
+        background: #f6f8fa;
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+      ul {
+        padding-left: 22px;
+      }
+      footer {
+        margin-top: 48px;
+        color: #6e7781;
+        font-size: 14px;
+      }
+      a {
+        color: #2563eb;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>封面避雷针 · 隐私政策</h1>
+    <p class="meta">生效日期：2026 年 11 月 3 日 · 适用版本 1.2.0 及以后</p>
+
+    <p class="lead">
+      <strong>一句话概括：本扩展不收集、不上传、不转售任何个人数据。</strong>
+      它没有服务器，没有统计埋点，没有账号系统。所有处理都在你自己的浏览器里完成。
+    </p>
+
+    <h2>一、收集哪些数据</h2>
+    <p>没有。本扩展不收集任何可识别个人身份的信息，包括但不限于：姓名、邮箱、电话、账号、位置、设备标识、浏览历史。它也不读写你的 Cookie、登录态或表单内容。</p>
+
+    <h2>二、在你的设备上存储什么</h2>
+    <table>
+      <tr>
+        <th>内容</th>
+        <th>用途</th>
+        <th>存储位置</th>
+      </tr>
+      <tr>
+        <td>总开关、站点开关、取帧档位三项设置</td>
+        <td>记住你的使用偏好</td>
+        <td>Chrome 的 <code>storage.sync</code>，随你的 Google 账号在本地浏览器间同步</td>
+      </tr>
+      <tr>
+        <td>已裁剪好的封面图片（最多 1500 条）</td>
+        <td>回看同一个视频时不必重新下载，减少流量和等待</td>
+        <td>本机 IndexedDB，仅在本地，不跨设备</td>
+      </tr>
+    </table>
+    <p>以上数据都不会离开你的设备。卸载扩展时，这些内容随扩展一起被浏览器清除。</p>
+
+    <h2>三、会发起哪些网络请求</h2>
+    <table>
+      <tr>
+        <th>目标</th>
+        <th>请求内容</th>
+      </tr>
+      <tr>
+        <td><code>api.bilibili.com</code></td>
+        <td>用视频编号请求该视频的进度条预览图信息（平台公开接口），无个人信息</td>
+      </tr>
+      <tr>
+        <td><code>i0.hdslb.com</code> 等 B 站图片域名</td>
+        <td>下载预览图，供本地裁剪</td>
+      </tr>
+      <tr>
+        <td><code>i.ytimg.com</code></td>
+        <td>直接读取 YouTube 自动生成的截帧图片</td>
+      </tr>
+      <tr>
+        <td><code>*.douyinpic.com</code>、<code>*.byteimg.com</code>、<code>*.ibyteimg.com</code></td>
+        <td>下载抖音预览图，供本地裁剪</td>
+      </tr>
+    </table>
+    <p><strong>本扩展不存在开发者自建服务器，不会向开发者或任何第三方发送任何数据。</strong></p>
+
+    <h2>四、权限用途</h2>
+    <ul>
+      <li><strong>storage</strong>：保存上面那三项设置。</li>
+      <li><strong>访问 bilibili.com、douyin.com、youtube.com 页面</strong>：读取页面上的视频卡片与封面元素，把封面换成该视频的真实画面。</li>
+      <li><strong>访问图片 CDN 域名</strong>：下载平台提供的预览图并在本地裁剪。</li>
+      <li><strong>在抖音页面环境中运行脚本</strong>：抖音的预览图数据由页面自身通过带签名的接口加载。为避免额外发起带签名的请求，扩展在页面环境内读取页面<em>已经加载到</em>的这部分数据，不修改、不拦截、不转发任何请求。</li>
+    </ul>
+
+    <h2>五、数据共享与第三方</h2>
+    <p>没有共享。本扩展不含广告、不含统计分析、不含远程代码、不接入任何第三方 SDK，也不会把数据用于与「替换封面」无关的任何用途。</p>
+
+    <h2>六、儿童隐私</h2>
+    <p>本扩展不面向 13 岁以下儿童，也不收集任何人的数据。</p>
+
+    <h2>七、政策变更</h2>
+    <p>如未来功能变化涉及数据处理方式，会在本页更新并修改生效日期；涉及新增数据收集时，会先在扩展内明确告知。</p>
+
+    <h2>八、联系方式</h2>
+    <p>
+      问题、疑问或数据相关请求，请在本项目仓库提 issue：<br />
+      <a href="https://github.com/hiyanyang/clickbait-cop/issues"
+        >https://github.com/hiyanyang/clickbait-cop/issues</a
+      >
+    </p>
+
+    <footer>
+      封面避雷针（Clickbait Cop）· 以 MIT 协议开源。<br />
+      部分取帧实现思路来自
+      <a href="https://github.com/hiyanyang/honest-thumbnails">honest-thumbnails</a>（MIT）。
+    </footer>
+  </body>
+</html>

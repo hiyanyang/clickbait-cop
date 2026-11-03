@@ -1,0 +1,8 @@
+.ht-replaced {
+  object-fit: cover;
+}
+
+img.ht-replaced {
+  /* 雪碧图单帧是 16:9，卡片常被裁成其它比例，靠 object-fit 兜住 */
+  object-position: center;
+}

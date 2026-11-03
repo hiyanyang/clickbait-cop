@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="popup.css" />
+    <title>封面避雷针</title>
+  </head>
+  <body>
+    <header>
+      <h1>封面避雷针</h1>
+      <label class="switch" title="总开关">
+        <input type="checkbox" id="enabled" />
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <section class="block">
+      <div class="label">生效站点</div>
+      <label class="row">
+        <span>YouTube</span>
+        <input type="checkbox" id="siteYouTube" class="toggle" />
+      </label>
+      <label class="row">
+        <span>哔哩哔哩</span>
+        <input type="checkbox" id="siteBilibili" class="toggle" />
+      </label>
+      <label class="row">
+        <span>抖音</span>
+        <input type="checkbox" id="siteDouyin" class="toggle" />
+      </label>
+    </section>
+
+    <section class="block">
+      <div class="label">取哪一帧</div>
+      <div class="segmented" id="position">
+        <button data-value="early">前段 25%</button>
+        <button data-value="middle">中段 50%</button>
+        <button data-value="late">后段 75%</button>
+      </div>
+      <p class="hint" id="hint">用平台自带的预览图取帧，不下载视频。</p>
+    </section>
+
+    <footer>
+      <span id="status">未在目标站点</span>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
