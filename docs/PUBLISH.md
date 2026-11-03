@@ -77,7 +77,7 @@ bash scripts/package.sh
 **简介**（≤132 字符）
 
 ```
-把 YouTube、B站、抖音的视频封面换成视频里真实的画面，不再被夸张封面骗进去点开。
+把 YouTube、B站、抖音的封面换成视频里真实的画面，不再被夸张封面和 AI 生成的假封面骗进去。
 ```
 
 **详细描述**
@@ -87,6 +87,11 @@ bash scripts/package.sh
 
 ■ 覆盖三个站点
 YouTube、哔哩哔哩、抖音（含抖音精选、搜索页、个人主页）。
+
+■ AI 生成的假封面也一起失效
+现在越来越多封面是 AI 画的、或者拿生成图拼出来的，跟视频内容毫无关系。
+本插件不做 AI 检测，也不需要检测——它直接把封面换成视频里真实的画面，
+所以不管是夸张、摆拍还是 AI 生成的封面，你看到的都是视频本身。
 
 ■ 三档取帧
 前段 25% / 中段 50% / 后段 75%，默认取中段。中段的画面通常最能代表视频真实内容。
@@ -110,7 +115,7 @@ YouTube 直接用平台自动生成的三帧截图，速度最快。
 
 ■ English
 
-Clickbait Cop swaps clickbait thumbnails for real frames taken from the video itself, so you can tell what a video is actually about before clicking it. It works on YouTube, Bilibili and Douyin, and it reuses the preview images those platforms already generate for their progress bars — nothing is downloaded, transcoded or uploaded.
+Clickbait Cop swaps clickbait thumbnails for real frames taken from the video itself, so you can tell what a video is actually about before clicking it. That covers the AI-generated covers too — the ones that have nothing to do with the video behind them. There is no detection step: once the thumbnail is replaced by a real frame, a fake cover simply stops working. It works on YouTube, Bilibili and Douyin, and it reuses the preview images those platforms already generate for their progress bars — nothing is downloaded, transcoded or uploaded.
 
 Pick the early, middle or late frame, toggle each site separately, and switch everything off to get the original covers back instantly. Everything runs locally in your browser: no account, no tracking, no data leaves your device.
 
