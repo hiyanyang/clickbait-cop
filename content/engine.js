@@ -55,14 +55,86 @@
           el: s,
           srcset: s.getAttribute('srcset'),
           type: s.getAttribute('type')
-        }))
+        })),
+        // 竖屏帧改成 contain 时动过这两个 inline 值，还原时要用
+        objFit: el.style.objectFit,
+        bgColor: el.style.backgroundColor
       };
     }
     return {
       kind: 'bg',
       bg: el.style.backgroundImage,
-      bgColor: el.style.backgroundColor
+      bgColor: el.style.backgroundColor,
+      bgSize: el.style.backgroundSize,
+      bgRepeat: el.style.backgroundRepeat,
+      bgPos: el.style.backgroundPosition
     };
+  }
+
+  /**
+   * 让封面按原尺寸显示，不要被页面的 object-fit: cover 硬放大。
+   *
+   * 为什么需要：封面容器常常是横版，而竖屏视频的截帧是竖版。cover 会等比放大到
+   * 填满容器宽度，再上下裁掉大半 —— 等于把 200px 宽的图放大两倍只露中间一条，
+   * 必然糊。改成 contain 后整帧完整显示，放大倍率降到 1 以下。
+   *
+   * 只处理「帧是竖版、容器不是竖版」这一种情况。横版帧塞横版容器本来就方向一致，
+   * 不动它，避免把 B 站这类原本正常的封面改小。
+   */
+  function maybeFit(el, w, h) {
+    if (!el.isConnected || !w || !h) return;
+    if (w >= h) return; // 帧不是竖版，不干预
+
+    const r = el.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+    if (r.width < r.height) return; // 容器本身也是竖版，cover 不会额外放大
+
+    // 已经被页面重新渲染过就跳过，避免和页面的样式抖动
+    if (el.getAttribute('data-ht-fit') === '1') return;
+
+    if (el.tagName === 'IMG') {
+      el.style.objectFit = 'contain';
+      el.style.backgroundColor = '#111';
+    } else {
+      el.style.backgroundSize = 'contain';
+      el.style.backgroundRepeat = 'no-repeat';
+      el.style.backgroundPosition = 'center';
+      el.style.backgroundColor = '#111';
+    }
+    el.setAttribute('data-ht-fit', '1');
+  }
+
+  const bgProbe = new Map(); // dataURL -> {w,h}，只给 background-image 用
+
+  function probeBg(url, el) {
+    if (bgProbe.has(url)) {
+      const d = bgProbe.get(url);
+      if (d) maybeFit(el, d.w, d.h);
+      return;
+    }
+    const im = new Image();
+    im.onload = () => {
+      const d = { w: im.naturalWidth, h: im.naturalHeight };
+      if (bgProbe.size > 200) bgProbe.clear();
+      bgProbe.set(url, d);
+      maybeFit(el, d.w, d.h);
+    };
+    im.onerror = () => bgProbe.set(url, null);
+    im.src = url;
+  }
+
+  function clearFit(el) {
+    if (el.getAttribute('data-ht-fit') !== '1') return;
+    el.removeAttribute('data-ht-fit');
+    if (el.tagName === 'IMG') {
+      el.style.objectFit = '';
+      el.style.backgroundColor = '';
+    } else {
+      el.style.backgroundSize = '';
+      el.style.backgroundRepeat = '';
+      el.style.backgroundPosition = '';
+      el.style.backgroundColor = '';
+    }
   }
 
   function applyFrame(el, dataUrl, key) {
@@ -72,6 +144,7 @@
       elState.delete(el);
       el.classList.remove('ht-replaced');
       el.removeAttribute('data-ht');
+      clearFit(el);
       st = null;
     }
     if (!st) {
@@ -88,8 +161,19 @@
         s.el.removeAttribute('type');
       }
       el.setAttribute('src', dataUrl);
+      // dataURL 解码仍是异步的：已就绪就直接量，否则等 load
+      if (el.complete && el.naturalWidth) {
+        maybeFit(el, el.naturalWidth, el.naturalHeight);
+      } else {
+        el.addEventListener(
+          'load',
+          () => maybeFit(el, el.naturalWidth, el.naturalHeight),
+          { once: true }
+        );
+      }
     } else {
       el.style.backgroundImage = `url("${dataUrl}")`;
+      probeBg(dataUrl, el);
     }
 
     st.written = readValue(el);
@@ -102,6 +186,7 @@
     const st = elState.get(el);
     el.classList.remove('ht-replaced');
     el.removeAttribute('data-ht');
+    el.removeAttribute('data-ht-fit');
     if (!st) return;
     elState.delete(el);
 
@@ -118,8 +203,14 @@
         if (s.type === null) s.el.removeAttribute('type');
         else s.el.setAttribute('type', s.type);
       }
+      el.style.objectFit = st.objFit || '';
+      el.style.backgroundColor = st.bgColor || '';
     } else if (st.bg !== undefined) {
       el.style.backgroundImage = st.bg;
+      el.style.backgroundColor = st.bgColor || '';
+      el.style.backgroundSize = st.bgSize || '';
+      el.style.backgroundRepeat = st.bgRepeat || '';
+      el.style.backgroundPosition = st.bgPos || '';
     }
   }
 
@@ -292,6 +383,7 @@
           elState.delete(el);
           el.classList.remove('ht-replaced');
           el.removeAttribute('data-ht');
+          clearFit(el);
         } else if (st.key === key) {
           continue; // 已是目标帧
         } else {
