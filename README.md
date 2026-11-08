@@ -21,11 +21,13 @@
 
 ## 安装
 
-**方式一：Chrome 应用商店（推荐）**
+**方式一：Chrome 应用商店（推荐，已正式上架）**
 
-在 Chrome 应用商店搜索「**封面避雷针**」（英文名 Clickbait Cop）。商店审核通过后即可搜到，一键安装，无需开发者模式。
+**[→ 点这里一键安装：封面避雷针 · Chrome 应用商店](https://chromewebstore.google.com/detail/ocmeffoecjfglanadblfejfdhlafbehc)**
 
-**方式二：手动安装（商店版审核期间可用）**
+也可以在商店里搜「**封面避雷针**」（英文名 Clickbait Cop）。无需开发者模式，装完自动更新。
+
+**方式二：手动安装（想先试 GitHub 上的最新版时）**
 
 1. 下载最新版 zip：[releases 页面](https://github.com/hiyanyang/clickbait-cop/releases/latest) 里对应版本的 `cover-lightning-rod-*.zip`，解压
 2. 打开 `chrome://extensions`，右上角打开「开发者模式」
@@ -206,7 +208,7 @@ scripts/package.sh   打 zip
 
 ## 上架
 
-状态：**1.3.2 已上线 Chrome 应用商店**（2026-11-04），搜索「封面避雷针」即可安装；1.3.3 已上传到开发者后台，待提交审核。
+状态：**已正式上架 Chrome 应用商店**（1.3.2 于 2026-11-04 上线），商店页：**[封面避雷针](https://chromewebstore.google.com/detail/ocmeffoecjfglanadblfejfdhlafbehc)**；1.3.3 已上传到开发者后台，待提交审核。
 
 完整步骤见 [docs/PUBLISH.md](docs/PUBLISH.md)，当前版本的发布说明见 [docs/RELEASE.md](docs/RELEASE.md) 与 [releases](https://github.com/hiyanyang/clickbait-cop/releases)。
 
