@@ -1,5 +1,7 @@
 # 封面避雷针 · Clickbait Cop
 
+![封面避雷针 · Clickbait Cop](docs/screenshots/marquee-1400x560.png)
+
 把 **YouTube**、**哔哩哔哩**、**抖音**的视频封面替换成视频里真实的中段画面，不再被夸张封面和 **AI 生成的假封面**骗进去。
 
 不下载视频、不转码、没有后端。三个平台取的都是它们自己已经生成好的预览帧。
@@ -9,6 +11,14 @@
 > 想上架 Chrome 应用商店？见 **[docs/PUBLISH.md](docs/PUBLISH.md)**：材料清单、申请入口、可直接复制的商品文案与权限说明，以及针对本插件的拒审风险。
 > 隐私政策全文：**[docs/privacy.html](docs/privacy.html)**
 
+## 效果预览
+
+![YouTube 搜索结果：封面已换成视频里的画面](docs/screenshots/youtube-1280x800.jpg)
+
+![抖音搜索结果：竖版封面保持原比例，两侧留边](docs/screenshots/douyin-grid-1280x800.jpg)
+
+两张都是商店用的实拍图（1280×800）。抖音这类竖屏视频，从 **1.3.3** 起不再把竖版画面塞进横版卡片里放大，而是保持原比例居中显示、两侧留深色边——放大倍数降到 1 以下，清晰度不再掉。
+
 ## 安装
 
 **方式一：Chrome 应用商店（推荐）**
@@ -17,7 +27,7 @@
 
 **方式二：手动安装（商店版审核期间可用）**
 
-1. 下载 [cover-lightning-rod-1.3.2.zip](https://github.com/hiyanyang/clickbait-cop/releases/latest/download/cover-lightning-rod-1.3.2.zip) 并解压
+1. 下载最新版 zip：[releases 页面](https://github.com/hiyanyang/clickbait-cop/releases/latest) 里对应版本的 `cover-lightning-rod-*.zip`，解压
 2. 打开 `chrome://extensions`，右上角打开「开发者模式」
 3. 「加载已解压的扩展程序」→ 选解压出来的文件夹
 4. 打开 youtube.com / bilibili.com / douyin.com，刷新一次
@@ -133,7 +143,7 @@ GET https://api.bilibili.com/x/player/videoshot?bvid=<BV号>&index=1
 
 ## 已知限制
 
-1. **大卡片会有点糊**：抖音精选顶部大图约 1033px 宽，平台预览图单帧只有 240×136，放大约 4 倍；B 站是 160×90 放大 2 倍；YouTube 的 maxres 是 1280×720，基本不糊。
+1. **横版大卡片会有点糊**：抖音精选顶部大图约 1033px 宽，平台预览图单帧只有 240×136，放大约 4 倍；B 站是 160×90 放大 2 倍；YouTube 的 maxres 是 1280×720，基本不糊。竖版封面（抖音竖屏视频）自 1.3.3 起改为保持原比例居中显示，不再横向放大，代价是两侧留深色边。
 2. **YouTube 没有 maxres 的老视频会退回 hq（480×360，带黑边）**，画质一般。
 3. **YouTube Shorts 不处理**：竖版封面换横版帧会变形，直接跳过。
 4. **多 P 视频**只取 P1 的快照（`videoshot` 不带 `cid`）。分 P 的第 2 集以后会显示 P1 的画面。
@@ -174,17 +184,31 @@ content.css          替换后的 object-fit 兜底
 popup.*              开关与档位
 icons/               16 / 32 / 48 / 128 图标
 docs/PUBLISH.md      Chrome 应用商店上架手册（含可复制的文案）
+docs/RELEASE.md      发布说明正文，贴到 GitHub Release 用
 docs/privacy.html    隐私政策，可直接挂 GitHub Pages
 docs/upstream-banner.md  原仓库 README 用的导流语
-docs/screenshots/    商店用 1280×800 实拍截图
+docs/screenshots/    商店素材：1280×800 截图、440×280 小宣传图、1400×560 横幅
 scripts/package.sh   打 zip
 ```
 
+## 更新日志
+
+**1.3.3**（2026-11-08）
+
+- 抖音竖屏视频：封面不再被横向拉伸放大，改为保持原比例居中显示、两侧留深色边（`object-fit: contain`），放大倍数降到 1 以下
+- 商店素材统一换成图标同款蓝底：小宣传图 440×280、横幅 1400×560
+- 新增两张 1280×800 商店截图（YouTube / 抖音搜索结果页）
+- 安装包与商店版功能一致，权限未变
+
+**1.3.2**（2026-11-04）
+
+- 首个通过 Chrome 应用商店审核、正式上线的版本
+
 ## 上架
 
-状态：**已提交 Chrome 应用商店，审核中**（2026-11-03）。审核通过后商店搜索「封面避雷针」即可安装。
+状态：**1.3.2 已上线 Chrome 应用商店**（2026-11-04），搜索「封面避雷针」即可安装；1.3.3 已上传到开发者后台，待提交审核。
 
-完整步骤见 [docs/PUBLISH.md](docs/PUBLISH.md)，当前版本的发布说明见 [releases](https://github.com/hiyanyang/clickbait-cop/releases)。
+完整步骤见 [docs/PUBLISH.md](docs/PUBLISH.md)，当前版本的发布说明见 [docs/RELEASE.md](docs/RELEASE.md) 与 [releases](https://github.com/hiyanyang/clickbait-cop/releases)。
 
 ## 来源与致谢
 

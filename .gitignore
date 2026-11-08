@@ -6,3 +6,11 @@ dist/
 .DS_Store
 Thumbs.db
 *.log
+
+# 出图过程文件与本地浏览器自动化脚本
+# scripts/wb/ 含本机绝对路径与商店开发者 ID，docs/screenshots 下的中间产物不入库
+scripts/wb/
+docs/screenshots/preview/
+docs/screenshots/wb/
+docs/screenshots/archive/
+docs/screenshots/promo-440x280-v2-A.png
